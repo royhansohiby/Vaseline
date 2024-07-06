@@ -1,13 +1,10 @@
+// screens/Home.js
 import React from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, TextInput } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 
-const App = () => {
+const Home = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Tema</Text>
-      </View>
 
       {/* Search Bar */}
       <View style={styles.searchBar}>
@@ -16,40 +13,41 @@ const App = () => {
 
       {/* Editor's Choice */}
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionHeaderText}>Pilihan editor</Text>
+        <Text style={styles.sectionHeaderText}>Produk</Text>
         <Text style={styles.sectionHeaderLink}>Lainnya</Text>
       </View>
       <ScrollView horizontal>
-        <ThemePreview imageUrl="https://example.com/theme1.png" />
-        <ThemePreview imageUrl="https://example.com/theme2.png" />
-        <ThemePreview imageUrl="https://example.com/theme3.png" />
-        <ThemePreview imageUrl="https://example.com/theme4.png" />
+        <ThemePreview imageUrl="URL_IMAGE" />
+        <ThemePreview imageUrl="URL_IMAGE" />
+        <ThemePreview imageUrl="URL_IMAGE" />
+        <ThemePreview imageUrl="URL_IMAGE" />
       </ScrollView>
 
       {/* Colors */}
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionHeaderText}>Warna/i</Text>
+        <Text style={styles.sectionHeaderText}>Produk</Text>
         <Text style={styles.sectionHeaderLink}>Lainnya</Text>
       </View>
       <ScrollView horizontal>
-        <ColorPreview imageUrl="https://example.com/color1.png" />
-        <ColorPreview imageUrl="https://example.com/color2.png" />
-        <ColorPreview imageUrl="https://example.com/color3.png" />
-        <ColorPreview imageUrl="https://example.com/color4.png" />
+        <ColorPreview imageUrl="URL_IMAGE" />
+        <ColorPreview imageUrl="URL_IMAGE" />
+        <ColorPreview imageUrl="URL_IMAGE" />
+        <ColorPreview imageUrl="URL_IMAGE" />
       </ScrollView>
     </ScrollView>
   );
 };
 
-const Category = ({ name }) => (
+const Category = ({ name, iconUrl }) => (
   <View style={styles.category}>
+    <Image source={{ uri: iconUrl }} style={styles.categoryIcon} />
     <Text style={styles.categoryText}>{name}</Text>
   </View>
 );
 
-const Promotion = ({ name, imageUrl }) => (
+const Promotion = ({ name, iconUrl }) => (
   <View style={styles.promotion}>
-    <Image source={{ uri: imageUrl }} style={styles.promotionImage} />
+    <Image source={{ uri: iconUrl }} style={styles.promotionIcon} />
     <Text style={styles.promotionText}>{name}</Text>
   </View>
 );
@@ -71,30 +69,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  header: {
-    padding: 16,
-    backgroundColor: '#555',
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  headerSubTextContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 8,
-  },
-  headerSubText: {
-    fontSize: 16,
-    color: '#888',
-  },
+  
   searchBar: {
-    padding: 16,
+    padding: 5,
+    backgroundColor: '#231',
+    margin: 5,
+    borderRadius: 8,
   },
   searchInput: {
-    backgroundColor: '#e0e0e0',
-    padding: 8,
-    borderRadius: 8,
+    color: '#888',
   },
   categories: {
     flexDirection: 'row',
@@ -103,6 +86,10 @@ const styles = StyleSheet.create({
   },
   category: {
     alignItems: 'center',
+  },
+  categoryIcon: {
+    width: 40,
+    height: 40,
   },
   categoryText: {
     fontSize: 16,
@@ -115,13 +102,12 @@ const styles = StyleSheet.create({
   promotion: {
     alignItems: 'center',
   },
-  promotionImage: {
+  promotionIcon: {
     width: 50,
     height: 50,
   },
   promotionText: {
     fontSize: 16,
-    marginTop: 8,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -142,6 +128,8 @@ const styles = StyleSheet.create({
     height: 200,
     backgroundColor: '#ccc',
     margin: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   themeImage: {
     width: '100%',
@@ -152,6 +140,8 @@ const styles = StyleSheet.create({
     height: 200,
     backgroundColor: '#ccc',
     margin: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   colorImage: {
     width: '100%',
@@ -159,4 +149,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;
