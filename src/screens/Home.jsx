@@ -1,8 +1,11 @@
 // screens/Home.js
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 
 const Home = ({ navigation }) => {
+  const [themeImageUrl, setThemeImageUrl] = useState('');
+  const [colorImageUrl, setColorImageUrl] = useState('');
+
   return (
     <ScrollView style={styles.container}>
 
@@ -11,17 +14,37 @@ const Home = ({ navigation }) => {
         <TextInput style={styles.searchInput} placeholder="Search" />
       </View>
 
+      {/* URL Input for Theme Image */}
+      <View style={styles.urlInputContainer}>
+        <TextInput
+          style={styles.urlInput}
+          placeholder="Enter Theme Image URL"
+          value={themeImageUrl}
+          onChangeText={setThemeImageUrl}
+        />
+      </View>
+
       {/* Editor's Choice */}
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionHeaderText}>Produk</Text>
         <Text style={styles.sectionHeaderLink}>Lainnya</Text>
       </View>
       <ScrollView horizontal>
-        <ThemePreview imageUrl="URL_IMAGE" />
-        <ThemePreview imageUrl="URL_IMAGE" />
-        <ThemePreview imageUrl="URL_IMAGE" />
-        <ThemePreview imageUrl="URL_IMAGE" />
+        <ThemePreview imageUrl={themeImageUrl} />
+        <ThemePreview imageUrl="https://cf.shopee.co.id/file/01b0b70c0a503d8cbc6ab952a574ce5b" />
+        <ThemePreview imageUrl="https://cf.shopee.co.id/file/01b0b70c0a503d8cbc6ab952a574ce5b" />
+        <ThemePreview imageUrl="https://cf.shopee.co.id/file/01b0b70c0a503d8cbc6ab952a574ce5b" />
       </ScrollView>
+
+      {/* URL Input for Color Image */}
+      <View style={styles.urlInputContainer}>
+        <TextInput
+          style={styles.urlInput}
+          placeholder="Enter Color Image URL"
+          value={colorImageUrl}
+          onChangeText={setColorImageUrl}
+        />
+      </View>
 
       {/* Colors */}
       <View style={styles.sectionHeader}>
@@ -29,38 +52,34 @@ const Home = ({ navigation }) => {
         <Text style={styles.sectionHeaderLink}>Lainnya</Text>
       </View>
       <ScrollView horizontal>
-        <ColorPreview imageUrl="URL_IMAGE" />
-        <ColorPreview imageUrl="URL_IMAGE" />
-        <ColorPreview imageUrl="URL_IMAGE" />
-        <ColorPreview imageUrl="URL_IMAGE" />
+        <ColorPreview imageUrl={colorImageUrl} />
+        <ColorPreview imageUrl="https://cf.shopee.co.id/file/01b0b70c0a503d8cbc6ab952a574ce5b" />
+        <ColorPreview imageUrl="https://cf.shopee.co.id/file/01b0b70c0a503d8cbc6ab952a574ce5b" />
+        <ColorPreview imageUrl="https://cf.shopee.co.id/file/01b0b70c0a503d8cbc6ab952a574ce5b" />
       </ScrollView>
     </ScrollView>
   );
 };
 
-const Category = ({ name, iconUrl }) => (
-  <View style={styles.category}>
-    <Image source={{ uri: iconUrl }} style={styles.categoryIcon} />
-    <Text style={styles.categoryText}>{name}</Text>
-  </View>
-);
-
-const Promotion = ({ name, iconUrl }) => (
-  <View style={styles.promotion}>
-    <Image source={{ uri: iconUrl }} style={styles.promotionIcon} />
-    <Text style={styles.promotionText}>{name}</Text>
-  </View>
-);
-
 const ThemePreview = ({ imageUrl }) => (
   <View style={styles.themePreview}>
-    <Image source={{ uri: imageUrl }} style={styles.themeImage} />
+    <Image
+      source={{ uri: imageUrl }}
+      style={styles.themeImage}
+      resizeMode="cover"
+      onError={() => console.log('Error loading image')}
+    />
   </View>
 );
 
 const ColorPreview = ({ imageUrl }) => (
   <View style={styles.colorPreview}>
-    <Image source={{ uri: imageUrl }} style={styles.colorImage} />
+    <Image
+      source={{ uri: imageUrl }}
+      style={styles.colorImage}
+      resizeMode="cover"
+      onError={() => console.log('Error loading image')}
+    />
   </View>
 );
 
@@ -146,6 +165,15 @@ const styles = StyleSheet.create({
   colorImage: {
     width: '100%',
     height: '100%',
+  },
+  urlInputContainer: {
+    padding: 16,
+  },
+  urlInput: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    paddingHorizontal: 8,
   },
 });
 
